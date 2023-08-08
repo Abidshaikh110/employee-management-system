@@ -1,0 +1,359 @@
+#include<iostream>
+#include<windows.h>
+#include<conio.h>
+#include<string>
+using namespace std;
+
+struct data{
+	string name,address,id;
+	string salary,cont;
+};
+    int data_index =0;
+    data storage[100]; // array of structure to store data
+
+    
+void add(){
+	int get;
+	cout<<"enter the number of employee data you want to enter: ";
+	cin>>get;
+	
+	for(int i=data_index;i<get+data_index;i++){
+		cout<<endl;
+		cout<<endl;
+		cout<<"-----------------------------"<<endl;
+		cout<<"ENTER THE DATA OF EMPLOYEE  "<<i+1<<endl;
+		cout<<"-----------------------------"<<endl;
+		cout<<endl;
+		cout<<"ENTER EMPLOYEE NAME: ";
+		cin>>storage[i].name;
+		cout<<"------------------------"<<endl;
+		cout<<"ENTER EMPLOYEE ID: ";
+		cin>>storage[i].id;
+		cout<<"------------------------"<<endl;
+		cout<<"ENTER EMPLOYEE ADDRESS: ";
+		cin>>storage[i].address;
+		cout<<"------------------------"<<endl;
+		cout<<"ENTER EMPLOYEE SALARY: ";
+		cin>>storage[i].salary;
+		cout<<"------------------------"<<endl;
+		cout<<"ENTER EMPLOYEE CONTACT: ";
+		cin>>storage[i].cont;			
+	}	 
+	cout<<endl;
+	cout<<endl;
+	cout<<"---DATA HAVE BEEN SAVED ---";
+	data_index+=get; 
+}
+
+void view(){
+	if(data_index!=0){
+		cout<<"--------------------------"<<endl;
+		cout<<" TOTAL NUMBER OF EMPLOYEES: "<<data_index<<endl;
+		cout<<"--------------------------"<<endl;
+		cout<<endl;
+		    for(int i=0;i<data_index;i++){
+		cout<<"EMPLOYEE DATA NUMBER: "<<i+1<<endl;
+		cout<<"EMPLOYEE NAME: "<<storage[i].name<<endl;
+		cout<<"EMPLOYEE ID: "<<storage[i].id<<endl;
+		cout<<"EMPLOYEE ADDRESS: "<<storage[i].address<<endl;
+		cout<<"EMPLOYEE SALARY: "<<storage[i].salary<<endl;
+		cout<<"EMPLOYEE CONTACT: "<<storage[i].cont<<endl;
+		cout<<endl;
+		cout<<"-------------------------------"<<endl;
+		cout<<endl;
+	}	 
+		
+	}
+	else{
+		cout<<"NO DATA FOUND! ";
+	}
+}
+
+void search(){
+	if(data_index!=0){
+		cout<<"ENTER ID OF EMPLOYEE: ";
+		string temp;
+		cin>>temp;
+		for(int i=0;i<data_index;i++){
+			if(temp==(storage[i].id)){
+	
+	    cout<<"---------------------------"<<endl;			
+     	cout<<"EMPLOYEE DATA NUMBER: "<<i+1<<endl;
+		cout<<"EMPLOYEE NAME: "<<storage[i].name<<endl;
+		cout<<"EMPLOYEE ID: "<<storage[i].id<<endl;
+		cout<<"EMPLOYEE ADDRESS: "<<storage[i].address<<endl;
+		cout<<"EMPLOYEE SALARY: "<<storage[i].salary<<endl;
+		cout<<"EMPLOYEE CONTACT: "<<storage[i].cont<<endl;
+		cout<<"----------------------------"<<endl;
+		break;		
+			}
+		if(i==data_index-1){
+			cout<<"ID WAS NOT FOUND IN THE RECORDS!";
+		}	
+			
+		
+		
+		}
+		}
+		else{
+			cout<<"NO RECORD FOUND!";
+		}
+	}
+	
+	void update(){
+		if(data_index!=0){
+		cout<<"ENTER EMPLOYEE ID YOU WANT TO UPDATE: ";
+		string temp;
+		cin>>temp;
+		for(int i=0;i<data_index;i++){
+		if(temp==storage[i].id){
+		cout<<"\t|| PREVIOUS DATA ||"<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<"EMPLOYEE DATA NUMBER: "<<i+1<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<"EMPLOYEE NAME: "<<storage[i].name<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<"EMPLOYEE ID: "<<storage[i].id<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<"EMPLOYEE ADDRESS: "<<storage[i].address<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<"EMPLOYEE SALARY: "<<storage[i].salary<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<"EMPLOYEE CONTACT: "<<storage[i].cont<<endl;
+		cout<<"------------------------------"<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<"||ENTER UPDATED DATA||";
+		cout<<endl;
+		cout<<"-------------------"<<endl;
+		cout<<"ENTER EMPLOYEE NAME: ";
+		cin>>storage[i].name;
+		cout<<"-------------------"<<endl;
+		cout<<"ENTER EMPLOYEE ID: ";
+		cin>>storage[i].id;
+		cout<<"-------------------"<<endl;
+		cout<<"ENTER EMPLOYEE ADDRESS: ";
+		getline(cin,storage[i].address);
+		cout<<"-------------------"<<endl;
+		cout<<"ENTER EMPLOYEE SALARY: ";
+		cin>>storage[i].salary;
+		cout<<"-------------------"<<endl;
+		cout<<"ENTER EMPLOYEE CONTACT: ";
+		cin>>storage[i].cont;
+		cout<<endl;
+		cout<<"YOUR DATA HAVE BEEN UPDATED SUCCESSFULLY!";	
+		break;		
+	}	 
+	if(i==data_index-1){
+			cout<<"NO SUCH ID FOUND IN THE RECORDS!";
+		}
+	}	
+	}
+	else{
+	cout<<"NO RECORD FOUND!";
+	}	 
+}
+void del(){
+	if(data_index!=0){
+		char del_opt;
+	    cout<<"-----------------------------"<<endl;
+		cout<<"ENTER 1 TO DELETE FULL RECORD"<<endl;
+		cout<<"-----------------------------"<<endl;
+		cout<<"ENTER 2 TO DELETE SPECIFIC RECORD"<<endl;
+		cout<<"-----------------------------"<<endl;
+		del_opt=getch();
+		if(del_opt=='1'){
+			data_index=0;
+			cout<<"COMPLETE RECORD HAS BEEN DELETED!";
+		}
+		else if(del_opt=='2'){
+			cout<<"ENTER ID: ";
+			string id;
+			cin>>id;
+			for(int i=0;i<data_index;i++){
+				if(id==storage[i].id){
+					for(int j=i;j<data_index;j++){
+						storage[j].address=storage[j+1].address;
+						storage[j].cont=storage[j+1].cont;
+						storage[j].name=storage[j+1].name;
+						storage[j].id=storage[j+1].id;
+						storage[j].salary=storage[j+1].salary;
+					}
+					cout<<"RECORD HAS BEEN DELETED!";
+					data_index=data_index-1;
+					break;
+				}
+				if(i==data_index-1){
+					cout<<"NO SUCH ID WAS FOUND IN THE RECORDS!";
+				}
+				
+			}
+			
+		}
+	}
+	else{
+		cout<<"NO RECORD FOUND!";
+	}
+	
+}
+
+int main(){
+	cout<<" "<<endl;
+	cout<<" "<<endl;
+	cout<<" "<<endl;
+	cout<<"\t\t\t\t\t -------------------------"<<endl;
+	cout<<"\t\t\t\t\t EMPLOYEE MANAGMENT SYSTEM "<<endl;
+	cout<<"\t\t\t\t\t -------------------------"<<endl;
+	cout<<" "<<endl;
+	cout<<" "<<endl;
+	cout<<"\t\t\t\t\t\t| SIGN UP | "<<endl;
+	cout<<" "<<endl;
+	cout<<" "<<endl;
+	
+	string username;
+	string password;
+	
+	cout<<"\t\t\t\t\t ENTER USERNAME: ";
+	cin>>username;
+	cout<<"\n\n"<<endl;
+	cout<<"\t\t\t\t\t ENTER PASSWORD: ";
+	cin>>password;
+	cout<<endl;
+	cout<<endl;
+	cout<<"\t\t\t\t\tLOADING"<<endl;
+	cout<<"\t\t\t\t\t";
+	
+	for(int i=0;i<24;i++){
+		cout<<"-";
+		Sleep(250);
+	}
+	cout<<endl;
+	cout<<endl;
+	cout<<endl;
+	
+	cout<<"\t\t\t\t\t|| YOUR ID HAS BEEN CREATED ||"<<endl;
+	Sleep(3000);
+	system("CLS");
+	again:
+	again_2:
+	cout<<endl;
+	cout<<endl;
+	cout<<endl;
+	cout<<"\t\t\t\t\t -------------------------"<<endl;
+	cout<<"\t\t\t\t\t EMPLOYEE MANAGMENT SYSTEM "<<endl;
+	cout<<"\t\t\t\t\t -------------------------"<<endl;
+	cout<<"\t\t\t\t\t\t| SIGN IN | "<<endl;
+	cout<<" "<<endl;
+	cout<<" "<<endl;
+	
+	string user_match;
+	string pass_match;
+	
+	cout<<"\t\t\t\t\t ENTER USERNAME: ";
+	cin>>user_match;
+	cout<<"\n\n"<<endl;
+	cout<<"\t\t\t\t\t ENTER PASSWORD: ";
+	cin>>pass_match;
+	cout<<endl;
+	cout<<endl;
+	if(user_match==username && pass_match==password){
+		cout<<"\t\t\t\t\t LOGIN WAS SUCCESSFUL"<<endl;
+		cout<<"\t\t\t\t\t PLEASE WAIT";
+	    for(int i=0;i<15;i++){
+		cout<<"-";
+		Sleep(250);
+	}
+	cout<<endl;
+	cout<<endl;
+	cout<<endl;
+	cout<<"press enter to continue";
+	goto page;
+	system("cls");
+	}
+	else if(user_match!=username){
+		cout<<"\t\t\t\t\t YOUR USERNAME IS INCORRECT";
+		Sleep(2000);
+		system("cls");
+		goto again;
+	}
+	else if(user_match!=username){
+		cout<<"\t\t\t\t\t YOUR PASSWORD IS INCORRECT";
+		Sleep(2000);
+		system("cls");
+		goto again;
+	}
+	
+	page:
+		while(4<5){
+			cin.get();
+			cin.get();
+			system("cls");
+			cout<<endl;
+			cout<<endl;
+			cout<<endl;
+	cout<<"\t\t\t\t\t -------------------------"<<endl;
+	cout<<"\t\t\t\t\t EMPLOYEE MANAGMENT SYSTEM "<<endl;
+	cout<<"\t\t\t\t\t -------------------------"<<endl;
+	cout<<endl;
+	cout<<endl;
+	cout<<endl;
+	            cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   1:   To View List of Employees";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   2:   To search employee data by name";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   3:   To Add New Employee Details";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   4:   To Remove an Employee Details";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   5:   To update data of employee";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   6:   To logout";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                cout<<"\n\t\t\t\tENTER   7  : To Exit     ";
+                cout<<"\n\t\t\t\t------------------------------------------------";
+                char choice=getch();
+                
+                system("cls");
+                
+         switch(choice){
+         case '1':{
+         		view();
+         		break;
+		 }
+		 case '2':{
+         		search();
+         		break;
+		 }
+		 case '3':{
+         		add();
+         		break;
+		 }
+		 case '4':{
+         		del();
+         		break;
+		 }
+		 case '5':{
+		 	    update();
+			break;
+		 }
+		 case '6':{
+		        goto again_2;	
+         		break;
+		 }
+		 case '7':{
+		 	   cout<<"--------------------------"<<endl;
+		 	   cout<<"EMPLOYEE MANAGEMENT SYSTEM "<<endl;
+		 	   cout<<"--------------------------"<<endl;
+		 	   cout<<endl;
+		 	   cout<<endl;
+		 
+		 	   return 0;
+         		break;
+	}
+		}
+}	
+return 0;
+}
